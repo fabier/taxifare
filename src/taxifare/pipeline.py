@@ -8,6 +8,10 @@ lonlat_features = [
     "dropoff_longitude",
 ]
 
+timedelta_min = 0
+# Our model may extend in the future. No big deal if the scaled data extend slightly beyond 1.0
+timedelta_max = 2190
+
 
 def scale_distance(dist):
     dist_min = 0
@@ -23,8 +27,9 @@ def scale_passenger(p):
     return p_scaled
 
 
-def scale_timedelta():
-    pass
+def scale_timedelta(timedelta):
+    scaled = (timedelta - timedelta_min) / (timedelta_max - timedelta_min)
+    return scaled
 
 
 def manhattan_distance_for_pipe(df):
