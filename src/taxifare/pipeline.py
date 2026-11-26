@@ -1,5 +1,8 @@
-def scale_distance():
-    pass
+def scale_distance(dist):
+    dist_min = 0
+    dist_max = 100
+    scaled = (dist - dist_min) / (dist_max - dist_min)
+    return scaled
 
 
 def scale_passenger():
