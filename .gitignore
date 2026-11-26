@@ -11,3 +11,6 @@ wheels/
 
 # ML Models
 models
+
+# Environment
+.env
