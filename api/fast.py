@@ -1,17 +1,43 @@
 from fastapi import FastAPI
+import pandas as pd
+
+from taxifare.predict import load_model
+from taxifare.predict import predict as model_predict
 
 app = FastAPI()
 
+model = load_model("models/linreg_pipeline.joblib")
 
 @app.get("/")
 def root():
     return {"message": "TaxiFare API is running"}
 
 @app.get("/predict")
-def predict(passenger_count: int):
+def predict(
+    pickup_datetime: str,
+    pickup_longitude: float,
+    pickup_latitude: float,
+    dropoff_longitude: float,
+    dropoff_latitude: float,
+    passenger_count: int,
+):
 
-    fare = passenger_count * 2.5
+    data = pd.DataFrame(
+        {
+            "pickup_datetime": [pickup_datetime],
+            "pickup_longitude": [pickup_longitude],
+            "pickup_latitude": [pickup_latitude],
+            "dropoff_longitude": [dropoff_longitude],
+            "dropoff_latitude": [dropoff_latitude],
+            "passenger_count": [passenger_count],
+        }
+    )
+
+    prediction = model_predict(
+        model=model,
+        data=data
+    )
 
     return {
-        "fare_amount": fare
+        "fare_amount": float(prediction[0])
     }
