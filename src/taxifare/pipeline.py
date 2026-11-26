@@ -15,6 +15,7 @@ timedelta_max = 2190
 
 
 def scale_distance(dist):
+    """Copied from notebook, scales distance data"""
     dist_min = 0
     dist_max = 100
     scaled = (dist - dist_min) / (dist_max - dist_min)
@@ -22,6 +23,7 @@ def scale_distance(dist):
 
 
 def scale_passenger(p):
+    """Copied from notebook, scales passenger information"""
     p_min = 0.0
     p_max = 8.0
     p_scaled = (p - p_min) / (p_max - p_min)
@@ -29,11 +31,13 @@ def scale_passenger(p):
 
 
 def scale_timedelta(timedelta):
+    """Copied from notebook, scales timedelta"""
     scaled = (timedelta - timedelta_min) / (timedelta_max - timedelta_min)
     return scaled
 
 
 def manhattan_distance_for_pipe(df):
+    """Copied from notebook, calculates the manhattan distance"""
     distance = manhattan_distance_vectorized(df, *lonlat_features)
     return pd.DataFrame({"distance": distance})
 
@@ -60,6 +64,7 @@ def manhattan_distance_vectorized(
 
 
 def transform_time_features(X: pd.DataFrame) -> pd.DataFrame:
+    """Copied from notebook, transforms time features in pipeline"""
     if isinstance(X, pd.Series):
         X = X.to_frame()
 
