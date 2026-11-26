@@ -16,8 +16,11 @@ def scale_distance(dist):
     return scaled
 
 
-def scale_passenger():
-    pass
+def scale_passenger(p):
+    p_min = 0.0
+    p_max = 8.0
+    p_scaled = (p - p_min) / (p_max - p_min)
+    return p_scaled
 
 
 def scale_timedelta():
