@@ -6,5 +6,6 @@ def load_model(model_path: str):
     return joblib.load(filename=model_path)
 
 
-def predict():
-    pass
+def predict(model, data):
+    """Make predictions using the loaded model and input data."""
+    return model.predict(data)
