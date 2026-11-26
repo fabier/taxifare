@@ -39,5 +39,5 @@ def predict(
     )
 
     return {
-        "fare_amount": float(prediction[0])
+        "fare": float(prediction[0])
     }
